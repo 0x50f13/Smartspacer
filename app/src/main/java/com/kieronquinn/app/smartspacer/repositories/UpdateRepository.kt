@@ -28,7 +28,7 @@ class UpdateRepositoryImpl(
 
     companion object {
         @VisibleForTesting
-        var BASE_URL = "https://api.github.com/repos/KieronQuinn/Smartspacer/"
+        var BASE_URL = "https://api.github.com/repos/0x50f13/Smartspacer/"
     }
 
     private val gitHubService = Retrofit.Builder()

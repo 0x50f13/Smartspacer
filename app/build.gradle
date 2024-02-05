@@ -11,8 +11,8 @@ plugins {
 
 apply plugin: 'com.google.android.gms.oss-licenses-plugin'
 
-def tagName = '1.7.0-maroon'
-def tagCode = 100170
+def tagName = '1.6.1-maroon1' // <original version>-maroon<fork version>
+def tagCode = 101161 //1<xx><original version> where xx is fork version
 
 android {
     compileSdk 34
