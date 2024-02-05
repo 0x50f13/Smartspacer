@@ -7,8 +7,6 @@ plugins {
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
     id 'dev.rikka.tools.refine'
     id 'com.google.protobuf'
-    id 'com.google.gms.google-services'
-    id 'com.google.firebase.crashlytics'
 }
 
 apply plugin: 'com.google.android.gms.oss-licenses-plugin'

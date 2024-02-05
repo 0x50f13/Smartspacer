@@ -355,7 +355,6 @@
         </receiver>
 
         <receiver android:name=".receivers.NativeDismissReceiver" />
-        <receiver android:name=".receivers.StartShizukuReceiver" />
         <receiver android:name=".receivers.AtAGlanceClickReceiver" />
 
         <receiver
@@ -555,33 +554,6 @@
         </provider>
 
         <provider
-            android:name=".components.smartspace.complications.GoogleWeatherComplication"
-            android:authorities="${applicationId}.complication.googleweather"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.kieronquinn.app.smartspacer.COMPLICATION" />
-            </intent-filter>
-        </provider>
-
-        <provider
-            android:name=".components.smartspace.complications.DigitalWellbeingComplication"
-            android:authorities="${applicationId}.complication.digitalwellbeing"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.kieronquinn.app.smartspacer.COMPLICATION" />
-            </intent-filter>
-        </provider>
-
-        <provider
-            android:name=".components.smartspace.complications.GmailComplication"
-            android:authorities="${applicationId}.complication.gmail"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.kieronquinn.app.smartspacer.COMPLICATION" />
-            </intent-filter>
-        </provider>
-
-        <provider
             android:name=".components.smartspace.complications.SmsComplication"
             android:authorities="${applicationId}.complication.sms"
             android:exported="false">
@@ -629,24 +601,10 @@
         <!-- Built in widget mapping -->
 
         <provider
-            android:name=".components.smartspace.widgets.GoogleWeatherWidget"
-            android:authorities="${applicationId}.widget.googleweather"
-            android:exported="false" />
-
-        <provider
             android:name=".components.smartspace.widgets.AtAGlanceWidget"
             android:authorities="${applicationId}.widget.ataglance"
             android:exported="false" />
 
-        <provider
-            android:name=".components.smartspace.widgets.DigitalWellbeingWidget"
-            android:authorities="${applicationId}.widget.digitalwellbeing"
-            android:exported="false" />
-
-        <provider
-            android:name=".components.smartspace.widgets.GoogleWeatherForecastWidget"
-            android:authorities="${applicationId}.widget.googleweatherforecast"
-            android:exported="false" />
 
         <!-- Built in requirements -->
 
@@ -900,45 +858,6 @@
                 android:name="service.api.version"
                 android:value="7" />
         </service>
-
-        <activity
-            android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity"
-            android:theme="@style/AppTheme.ThirdPartyLicences" />
-
-        <activity
-            android:name="com.google.android.gms.oss.licenses.OssLicensesActivity"
-            android:theme="@style/AppTheme.ThirdPartyLicences" />
-
-        <!-- Google Maps SDK -->
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="${MAPS_API_KEY}" />
-
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
-
-        <!-- Firebase Analytics & Crashlytics are disabled unless the user opts in -->
-        <meta-data
-            android:name="firebase_analytics_collection_enabled"
-            android:value="false" />
-
-        <meta-data
-            android:name="firebase_crashlytics_collection_enabled"
-            android:value="false" />
-
-        <meta-data
-            android:name="xposedmodule"
-            android:value="true"/>
-        <meta-data
-            android:name="xposeddescription"
-            android:value="@string/xposed_desc"/>
-        <meta-data
-            android:name="xposedminversion"
-            android:value="90"/>
-        <meta-data
-            android:name="xposedscope"
-            android:resource="@array/xposed_scope"/>
 
     </application>
 
