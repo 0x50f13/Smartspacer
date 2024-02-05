@@ -54,6 +54,7 @@ class SmartspacerWidgetConfigurationFragment: BoundFragment<FragmentSmartspacerW
         setupPageControlsCard()
         setupPageNoControlsCard()
         setupColourAutomaticCard()
+        setupPageSwitchingCard()
         setupAnimateCard()
         setupColourWhiteCard()
         setupColourBlackCard()
@@ -61,6 +62,7 @@ class SmartspacerWidgetConfigurationFragment: BoundFragment<FragmentSmartspacerW
         setupHomeRadioButton()
         setupLockButton()
         setupLockRadioButton()
+        setupAutoPageSwitchingSwitch()
         setupAnimateSwitch()
         setupColourAutomaticButton()
         setupColourAutomaticRadioButton()
@@ -195,6 +197,11 @@ class SmartspacerWidgetConfigurationFragment: BoundFragment<FragmentSmartspacerW
         backgroundTintList = ColorStateList.valueOf(background)
     }
 
+    private fun setupPageSwitchingCard() = with(binding.smartspacerWidgetConfigurationAutoSwitchPagesCard) {
+        val background = monet.getPrimaryColor(context, !context.isDarkMode)
+        backgroundTintList = ColorStateList.valueOf(background)
+    }
+
     private fun setupAnimateCard() = with(binding.smartspacerWidgetConfigurationAnimateCard) {
         val background = monet.getPrimaryColor(context, !context.isDarkMode)
         backgroundTintList = ColorStateList.valueOf(background)
@@ -251,6 +258,30 @@ class SmartspacerWidgetConfigurationFragment: BoundFragment<FragmentSmartspacerW
         whenResumed {
             itemSettingsSwitchSwitch.onChanged().collect {
                 viewModel.onAnimateChanged(it)
+            }
+        }
+        binding.smartspacerWidgetConfigurationAnimateRoot.setOnClickListener {
+            itemSettingsSwitchSwitch.toggle()
+        }
+    }
+
+    private fun setupAutoPageSwitchingSwitch() = with(binding.smartspacerWidgetConfigurationAutoSwitchPagesSetting) {
+        itemSettingsSwitchTitle.setText("Switch page automatically")
+        itemSettingsSwitchContent.setText("Open next target every 10 seconds")
+        itemSettingsSwitchContent.isVisible = true
+        itemSettingsSwitchSpace.isVisible = true
+        itemSettingsSwitchIcon.isVisible = false
+        itemSettingsSwitchSwitch.setOnCheckedChangeListener(null)
+        itemSettingsSwitchSwitch.isEnabled = true
+        itemSettingsSwitchSwitch.applyMonet()
+        root.run {
+            background = null
+            isClickable = false
+            isFocusable = false
+        }
+        whenResumed {
+            itemSettingsSwitchSwitch.onChanged().collect {
+                viewModel.onAutoPageSwitchingChanged(it)
             }
         }
         binding.smartspacerWidgetConfigurationAnimateRoot.setOnClickListener {
@@ -389,6 +420,8 @@ class SmartspacerWidgetConfigurationFragment: BoundFragment<FragmentSmartspacerW
                     state.appWidget.surface == UiSurface.HOMESCREEN
                 binding.smartspacerWidgetConfigurationTypeLockRadio.isChecked =
                     state.appWidget.surface == UiSurface.LOCKSCREEN
+                binding.smartspacerWidgetConfigurationAutoSwitchPagesSetting.itemSettingsSwitchSwitch
+                    .isChecked = state.appWidget.animate
                 binding.smartspacerWidgetConfigurationAnimateSetting.itemSettingsSwitchSwitch
                     .isChecked = state.appWidget.animate
                 binding.smartspacerWidgetConfigurationColourAutomaticRadio.isChecked =

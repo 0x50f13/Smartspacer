@@ -345,6 +345,37 @@
 
             </com.google.android.material.card.MaterialCardView>
 
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/smartspacer_widget_configuration_auto_switch_pages_card"
+                style="@style/Widget.Material3.CardView.Filled.Smartspacer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_marginEnd="@dimen/margin_16"
+                android:layout_marginBottom="@dimen/margin_8"
+                app:cardBackgroundColor="?android:colorControlHighlight">
+
+                <FrameLayout
+                    android:id="@+id/smartspacer_widget_configuration_auto_switch_pages_root"
+                    android:background="?android:selectableItemBackground"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp">
+
+                    <include
+                        android:id="@+id/smartspacer_widget_configuration_auto_switch_pages_setting"
+                        layout="@layout/item_settings_switch_item"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </FrameLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

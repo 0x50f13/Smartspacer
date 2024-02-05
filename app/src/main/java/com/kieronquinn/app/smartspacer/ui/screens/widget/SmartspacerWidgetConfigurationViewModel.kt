@@ -33,6 +33,7 @@ abstract class SmartspacerWidgetConfigurationViewModel(scope: CoroutineScope?): 
     abstract fun onPageSingleClicked()
     abstract fun onPageControlsClicked()
     abstract fun onPageNoControlsClicked()
+    abstract fun onAutoPageSwitchingChanged(enabled: Boolean)
     abstract fun onAnimateChanged(enabled: Boolean)
     abstract fun onColourAutomaticClicked()
     abstract fun onColourWhiteClicked()
@@ -127,6 +128,13 @@ class SmartspacerWidgetConfigurationViewModelImpl(
         vmScope.launch {
             val current = appWidget.value ?: return@launch
             appWidget.emit(current.copy(multiPage = true, showControls = false))
+        }
+    }
+
+    override fun onAutoPageSwitchingChanged(enabled: Boolean) {
+        vmScope.launch {
+            val current = appWidget.value ?: return@launch
+            appWidget.emit(current.copy(autoSwitchPages = enabled))
         }
     }
 

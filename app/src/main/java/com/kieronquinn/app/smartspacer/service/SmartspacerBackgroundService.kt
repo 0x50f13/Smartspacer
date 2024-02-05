@@ -61,7 +61,6 @@ class SmartspacerBackgroundService: LifecycleService() {
 
     companion object {
         var isUsingEnhancedModeAppListener = false
-        val TAG = "SmartspacerBackgroundService"
 
         fun startServiceIfNeeded(context: Context) {
             if(isServiceRunning(context)) return

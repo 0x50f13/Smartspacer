@@ -241,7 +241,8 @@ class AppWidgetRepositoryImpl(
             //Don't block the thread for too long, fail if the database isn't loaded in time
             withTimeoutOrNull(2500L) {
                 appWidgets.firstNotNull().forEach{
-                    appWidget -> nextPage(appWidget.appWidgetId)
+                    appWidget ->
+                    if (appWidget.autoSwitchPages) nextPage(appWidget.appWidgetId)
                 }
             }
         }
