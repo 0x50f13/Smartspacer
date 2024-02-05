@@ -421,7 +421,7 @@ class SmartspacerWidgetConfigurationFragment: BoundFragment<FragmentSmartspacerW
                 binding.smartspacerWidgetConfigurationTypeLockRadio.isChecked =
                     state.appWidget.surface == UiSurface.LOCKSCREEN
                 binding.smartspacerWidgetConfigurationAutoSwitchPagesSetting.itemSettingsSwitchSwitch
-                    .isChecked = state.appWidget.animate
+                    .isChecked = state.appWidget.autoSwitchPages
                 binding.smartspacerWidgetConfigurationAnimateSetting.itemSettingsSwitchSwitch
                     .isChecked = state.appWidget.animate
                 binding.smartspacerWidgetConfigurationColourAutomaticRadio.isChecked =
