@@ -25,7 +25,9 @@ data class AppWidget(
     @ColumnInfo("show_controls")
     val showControls: Boolean,
     @ColumnInfo("animate")
-    val animate: Boolean = true
+    val animate: Boolean = true,
+    @ColumnInfo("auto_switch_pages")
+    val autoSwitchPages: Boolean = false,
 ): Parcelable {
 
     fun cloneWithId(newAppWidgetId: Int): AppWidget {
@@ -36,7 +38,8 @@ data class AppWidget(
             tintColour,
             multiPage,
             showControls,
-            animate
+            animate,
+            autoSwitchPages,
         )
     }
 

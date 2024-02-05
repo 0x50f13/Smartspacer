@@ -48,7 +48,6 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -69,7 +68,8 @@ interface AppWidgetRepository {
         tintColour: TintColour,
         multiPage: Boolean,
         showControls: Boolean,
-        animate: Boolean = true
+        animate: Boolean = true,
+        autoSwitchPages: Boolean = false,
     )
     fun deleteAppWidget(appWidgetId: Int)
     fun migrateAppWidget(oldAppWidgetId: Int, newAppWidgetId: Int)
@@ -155,7 +155,8 @@ class AppWidgetRepositoryImpl(
         tintColour: TintColour,
         multiPage: Boolean,
         showControls: Boolean,
-        animate: Boolean
+        animate: Boolean,
+        autoSwitchPages: Boolean
     ) {
         val widget = AppWidget(
             appWidgetId,
@@ -164,7 +165,8 @@ class AppWidgetRepositoryImpl(
             tintColour = tintColour,
             multiPage = multiPage,
             showControls = showControls,
-            animate = animate
+            animate = animate,
+            autoSwitchPages = autoSwitchPages,
         )
         scope.launch {
             databaseRepository.addAppWidget(widget)

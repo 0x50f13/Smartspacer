@@ -175,7 +175,8 @@ class SmartspacerWidgetConfigurationViewModelImpl(
                 current.tintColour,
                 current.multiPage,
                 current.showControls,
-                current.animate
+                current.animate,
+                current.autoSwitchPages,
             )
             closeBus.emit(Unit)
         }
