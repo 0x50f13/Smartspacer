@@ -152,10 +152,6 @@ dependencies {
     //OSS libraries activity
     implementation 'com.google.android.gms:play-services-oss-licenses:17.0.1'
 
-    //Firebase Analytics + Crashlytics
-    implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
-    implementation("com.google.firebase:firebase-crashlytics-ktx")
-    implementation("com.google.firebase:firebase-analytics-ktx")
 
     //Xposed for Discover replacement
     compileOnly("de.robv.android.xposed:api:82")

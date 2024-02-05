@@ -250,7 +250,6 @@ class Smartspacer: Application(), Configuration.Provider {
         single<SmartspacerSettingsRepository> { SmartspacerSettingsRepositoryImpl(get()) }
         single<ShizukuServiceRepository> { ShizukuServiceRepositoryImpl(get(), get()) }
         single<SystemSmartspaceRepository>(createdAtStart = true) { SystemSmartspaceRepositoryImpl(get(), get(), get(), get(), get()) }
-        single<AnalyticsRepository>(createdAtStart = true) { AnalyticsRepositoryImpl(get(), get()) }
         single<SmartspaceRepository> { SmartspaceRepositoryImpl(get(), get(), get(), get()) }
         single<TargetsRepository> { TargetsRepositoryImpl(get(), get()) }
         single<AppPredictionRepository>(createdAtStart = true) { AppPredictionRepositoryImpl(
