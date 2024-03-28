@@ -3,24 +3,24 @@
     <string name="app_name">Smartspacer</string>
     <string name="shortcut_name_smartspace">Smartspace</string>
     <string name="xposed_desc"><b>اختياري</b> مكن هذه الوحدة على المشغل أو المكون الإضافي لخلاصة Google للسماح باستبدال Google Discover بمساحة ذكية موسعة. يجب عليك أيضا تمكين الخيار في إعدادات Smartspace الموسعة في Smartspacer.</string>
-    <string name="dummy_home_content">This screen exists to work around badly implemented Widgets used by Smartspacer Plugins.\n\nSmartspacer can\'t act as a launcher, please select a different launcher.</string>
+    <string name="dummy_home_content">هذه الشاشة موجودة للعمل حول التطبيقات المصغرة التي تم تنفيذها بشكل سيئ المستخدمة بواسطة إضافات Smartspacer. \n\nSmartspacer لا يمكن استخدمه كمشغل شاشة رئيسية، يرجى تحديد مشغل مختلف.</string>
     <string name="dummy_home_open_settings">فتح الإعدادات</string>
-    <string name="notification_service">Smartspacer Notification Service</string>
-    <string name="loading">Loading…</string>
-    <string name="saving">Saving…</string>
+    <string name="notification_service">خدمة إشعار Smartspacer</string>
+    <string name="loading">جاري التحميل…</string>
+    <string name="saving">يجرى الحفظ…</string>
     <string name="search">البحث</string>
-    <string name="delete">Delete</string>
-    <string name="save">Save</string>
-    <string name="close">Close</string>
-    <string name="reset">Reset</string>
+    <string name="delete">حذف</string>
+    <string name="save">حفظ</string>
+    <string name="close">إغلاق</string>
+    <string name="reset">إعادة ضبط</string>
     <string name="menu_rerun_setup">إعادة الإعداد</string>
     <string name="bottom_nav_targets">الأغراض</string>
-    <string name="bottom_nav_complications">Complications</string>
+    <string name="bottom_nav_complications">الإضافات</string>
     <string name="bottom_nav_plugins">الإضافات</string>
-    <string name="bottom_nav_settings">Settings</string>
+    <string name="bottom_nav_settings">الإعدادات</string>
     <string name="download_size">%1s / %1s</string>
-    <string name="toast_restricted_mode">Allow restricted settings in the overflow menu</string>
-    <string name="restricted_mode_content_accessibility">Since Android 13, Google added a security check to the settings, preventing sideloaded apps from being allowed to use Accessibility Services by default.\n\n<b>If you see a message about a restricted setting when trying to enable the accessibility service, you need to open App Info allow restricted settings.</b></string>
+    <string name="toast_restricted_mode">السماح بالإعدادات المقيدة في قائمة التجاوز</string>
+    <string name="restricted_mode_content_accessibility">منذ صدور Android 13، Google أضافت تحققاً للأمان في الإعدادات، تمنع التطبيقات المحملة متوازياً من السماح لها باستخدام بخدمات الوصول بشكل افتراضي.\n\n<b> أذا رأيت رسالة عن الإعدادات المقيدة عند محاولة تفعيل خدمات الوصول، سوف تحتاج لفتح معلومات عن التطبيق السماح بالإعدادات المقيدة.</b></string>
     <string name="restricted_mode_content_warning_accessibility"><![CDATA[Since Android 14, Google have prevented apps sideloaded using the Package Installer from using Accessibility Services.<br><br><b>If you see a message about restricted settings, you must uninstall Smartspacer and reinstall it using a session installer-based app like <a href="https://play.google.com/store/apps/details?id=com.aefyr.sai">Split APKs Installer (SAI)</a> or the <a href="https://play.google.com/store/apps/details?id=com.apkmirror.helper.prod">APKMirror app</a>. Installing on top (without reinstalling) is NOT sufficient.<br><br></b>Alternatively, with Enhanced Mode enabled, Smartspacer will bypass this requirement (it cannot be done without Shizuku or root).]]></string>
     <string name="restricted_mode_content_notification">Since Android 13, Google added a security check to the settings, preventing sideloaded apps from being allowed to use Notification Access by default.\n\n<b>If you see a message about a restricted setting when trying to enable notification access, you need to open App Info allow restricted settings.</b></string>
     <string name="restricted_mode_content_warning_notification"><![CDATA[Since Android 14, Google have prevented apps sideloaded using the Package Installer from being allowed to use Notification Access.<br><br><b>If you see a message about restricted settings, you must uninstall Smartspacer and reinstall it using a session installer-based app like <a href="https://play.google.com/store/apps/details?id=com.aefyr.sai">Split APKs Installer (SAI)</a> or the <a href="https://play.google.com/store/apps/details?id=com.apkmirror.helper.prod">APKMirror app</a>. Installing on top (without reinstalling) is NOT sufficient.<br><br></b>Alternatively, with Enhanced Mode enabled, Smartspacer will bypass this requirement (it cannot be done without Shizuku or root).]]></string>
@@ -91,12 +91,12 @@
     <string name="target_date_description">Shows the current date, with space for two Complications</string>
     <string name="target_greeting_label">Greeting</string>
     <string name="target_greeting_description">Shows a short greeting, with space for two Complications</string>
-    <string name="target_greeting_morning">Good morning</string>
-    <string name="target_greeting_morning_name">Good morning, %1s</string>
-    <string name="target_greeting_afternoon">Good afternoon</string>
-    <string name="target_greeting_afternoon_name">Good afternoon, %1s</string>
-    <string name="target_greeting_evening">Good evening</string>
-    <string name="target_greeting_evening_name">Good evening, %1s</string>
+    <string name="target_greeting_morning">صباح الخير</string>
+    <string name="target_greeting_morning_name">صباح الخير, %1s</string>
+    <string name="target_greeting_afternoon">مساء الخير</string>
+    <string name="target_greeting_afternoon_name">مساء الخير, %1s</string>
+    <string name="target_greeting_evening">مساء الخير</string>
+    <string name="target_greeting_evening_name">مساء الخير, %1s</string>
     <string name="target_greeting_night">Good night</string>
     <string name="target_greeting_night_name">Good night, %1s</string>
     <string name="target_greeting_configuration_hide_if_no_complications_title">Dynamically Hide</string>
@@ -214,6 +214,9 @@
     <string name="target_edit_expanded_show_app_shortcuts_title">Show App Shortcuts</string>
     <string name="target_edit_expanded_show_app_shortcuts_content">Show App Shortcuts associated with this Target, if available</string>
     <string name="target_edit_expanded_show_app_shortcuts_content_unavailable">Requires Enhanced Mode</string>
+    <string name="target_edit_advanced_header">Advanced</string>
+    <string name="target_edit_disable_subcomplication_title">Disable Sub-Complication</string>
+    <string name="target_edit_disable_subcomplication_content">Prevents Smartspacer adding a Complication alongside this Target, if space is available</string>
     <string name="target_edit_settings_header">Settings</string>
     <string name="target_edit_requirements_title">Requirements</string>
     <string name="target_edit_requirements_content">Set the requirements for this target to appear</string>
@@ -971,16 +974,16 @@
     <string name="target_flashlight_incompatible">This Target requires a Torch</string>
     <string name="target_flashlight_settings_title">Settings</string>
     <string name="target_flashlight_settings_description">Configure whether to prompt to enable the torch based on light levels</string>
-    <string name="target_flashlight_title_on">Torch on</string>
-    <string name="target_flashlight_subtitle_on">Tap to turn off</string>
-    <string name="target_flashlight_title_off">Torch off</string>
-    <string name="target_flashlight_subtitle_off">Tap to turn on</string>
+    <string name="target_flashlight_title_on">الكشاف يعمل</string>
+    <string name="target_flashlight_subtitle_on">انقر للإيقاف</string>
+    <string name="target_flashlight_title_off">الكشاف مطفئ</string>
+    <string name="target_flashlight_subtitle_off">انقر للتشغيل</string>
     <string name="target_flashlight_settings_show_recommendation">Show Torch Enable Prompt</string>
     <string name="target_flashlight_settings_show_recommendation_content">Prompt to enable the torch when the light level is low (may use more battery)</string>
     <string name="target_flashlight_settings_show_recommendation_incompatible">This option is not compatible with your device</string>
     <string name="target_flashlight_toast">Grant the Camera permission</string>
     <!-- Gmail Complication -->
-    <string name="complication_gmail_label">Gmail Unread</string>
+    <string name="complication_gmail_label">Gmail غير مقروء</string>
     <string name="complication_gmail_description">Show the number of unread Gmail emails from selected labels</string>
     <string name="complication_gmail_description_filled_one">Show the number of unread Gmail emails at %1s in %1d label</string>
     <string name="complication_gmail_description_filled_other">Show the number of unread Gmail emails at %1s in %1d labels</string>
@@ -988,19 +991,19 @@
     <string name="complication_gmail_settings_account_title">Account</string>
     <string name="complication_gmail_settings_account_unselected">Not selected</string>
     <string name="complication_gmail_settings_title_labels">Select Labels</string>
-    <string name="complication_gmail_settings_title">Settings</string>
+    <string name="complication_gmail_settings_title">إعدادات</string>
     <string name="complication_gmail_settings_description">Select the account and labels to show unread emails from</string>
     <string name="complication_gmail_settings_toast">Grant the emails permission in Permissions &gt; Additional Permissions</string>
     <!-- SMS Complication -->
-    <string name="complication_sms_label">SMS Unread</string>
-    <string name="complication_sms_description">Show the number of unread SMS/RCS messages</string>
+    <string name="complication_sms_label">رسائل غير مقروءة</string>
+    <string name="complication_sms_description">إظهار عدد رسائل SMS/RCS غير المقروءة</string>
     <string name="complication_sms_settings_toast">Grant the Read SMS permission in Permissions</string>
     <!-- Missed Calls Complication -->
-    <string name="complication_missed_calls_label">Missed Calls</string>
-    <string name="complication_missed_calls_description">Show the number of missed calls</string>
+    <string name="complication_missed_calls_label">مكالمات فائتة</string>
+    <string name="complication_missed_calls_description">إظهار عدد المكالمات الفائتة</string>
     <string name="complication_missed_calls_settings_toast">Grant the Call Log permission in Permissions</string>
     <!-- Next Alarm Complication -->
-    <string name="complication_alarm_label">Next Alarm</string>
+    <string name="complication_alarm_label">التنبيه القادم</string>
     <string name="complication_alarm_description">Shows the next alarm set, within the next 12 hours</string>
     <string name="complication_blank_title">Blank Complication</string>
     <string name="complication_blank_content">Useful for minimal setups or spacers</string>
