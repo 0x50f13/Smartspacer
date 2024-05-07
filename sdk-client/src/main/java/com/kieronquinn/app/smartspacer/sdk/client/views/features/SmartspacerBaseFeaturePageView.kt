@@ -1,10 +1,12 @@
 package com.kieronquinn.app.smartspacer.sdk.client.views.features
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.CallSuper
 import androidx.core.view.isVisible
 import androidx.viewbinding.ViewBinding
 import com.kieronquinn.app.smartspacer.sdk.client.databinding.IncludeSmartspacePageSubtitleAndActionBinding
@@ -27,10 +29,13 @@ abstract class SmartspacerBaseFeaturePageView<V : ViewBinding>(
     abstract val title: IncludeSmartspacePageTitleBinding?
     abstract val subtitle: SubtitleBinding
 
+    @SuppressLint("RestrictedApi")
+    @CallSuper
     override suspend fun setTarget(
         target: SmartspaceTarget,
         interactionListener: SmartspaceTargetInteractionListener?,
-        tintColour: Int
+        tintColour: Int,
+        applyShadow: Boolean
     ) {
         target.headerAction?.let {
             title?.smartspaceViewTitle?.setText(it.title, tintColour)
@@ -53,9 +58,15 @@ abstract class SmartspacerBaseFeaturePageView<V : ViewBinding>(
                 Icon(icon, shouldTint = ComplicationTemplate.shouldTint(it))
             }
             subtitle.actionIcon?.setIcon(icon, tintColour)
-            subtitle.action?.setOnClick(target, it, interactionListener)
+            subtitle.action?.setOnClick(target, it, interactionListener, subtitle.actionIcon)
             subtitle.actionIcon?.setOnClick(target, it, interactionListener)
         }
+
+        title?.smartspaceViewTitle?.setShadowEnabled(applyShadow)
+        subtitle.subtitle.setShadowEnabled(applyShadow)
+        subtitle.subtitleIcon.setShadowEnabled(applyShadow)
+        subtitle.action?.setShadowEnabled(applyShadow)
+        subtitle.actionIcon?.setShadowEnabled(applyShadow)
     }
 
     sealed class SubtitleBinding {

@@ -17,6 +17,7 @@ import com.kieronquinn.app.smartspacer.ui.screens.expanded.addwidget.ExpandedAdd
 import com.kieronquinn.app.smartspacer.ui.screens.expanded.addwidget.ExpandedAddWidgetBottomSheetViewModel.Item
 import com.kieronquinn.app.smartspacer.ui.screens.expanded.addwidget.ExpandedAddWidgetBottomSheetViewModel.State
 import com.kieronquinn.app.smartspacer.utils.assertOutputs
+import com.kieronquinn.app.smartspacer.utils.extensions.WidgetCategory
 import com.kieronquinn.app.smartspacer.utils.extensions.getApplicationInfo
 import com.kieronquinn.app.smartspacer.utils.extensions.providerInfo
 import com.kieronquinn.app.smartspacer.utils.randomString
@@ -92,8 +93,8 @@ class ExpandedAddWidgetBottomSheetViewModelTests: BaseTest<ExpandedAddWidgetBott
         sut.state.test {
             sut.state.assertOutputs<State, State.Loaded>()
             val item = expectMostRecentItem() as State.Loaded
-            //Should only be the app dropdown and the header
-            assertTrue(item.items.size == 2)
+            //Should only be the app dropdown
+            assertTrue(item.items.size == 1)
             //Expand the first app
             val app = item.items.first { it is Item.App } as Item.App
             sut.onExpandClicked(app)
@@ -101,7 +102,7 @@ class ExpandedAddWidgetBottomSheetViewModelTests: BaseTest<ExpandedAddWidgetBott
             val expandedItem = awaitItem()
             assertTrue(expandedItem is State.Loaded)
             expandedItem as State.Loaded
-            assertTrue(expandedItem.items.size == 2 + mockWidgets.size)
+            assertTrue(expandedItem.items.size == 1 + mockWidgets.size)
         }
     }
 
@@ -109,8 +110,9 @@ class ExpandedAddWidgetBottomSheetViewModelTests: BaseTest<ExpandedAddWidgetBott
     fun testAddState() = runTest {
         sut.addState.test {
             val mockWidget = mockWidgets.first()
-            val widget = Item.Widget("Widget", mockWidget, 4, 1)
-            sut.onWidgetClicked(widget)
+            val parent = Item.App("Widget", "Widget", "Widget", null)
+            val widget = Item.Widget(parent, WidgetCategory.OTHERS, "Widget", "Description", mockWidget)
+            sut.onWidgetClicked(widget, 5, 2)
             verify {
                 expandedRepositoryMock.allocateAppWidgetId()
             }

@@ -9,6 +9,7 @@ import com.kieronquinn.app.smartspacer.repositories.SearchRepository
 import com.kieronquinn.app.smartspacer.repositories.SearchRepository.SearchApp
 import com.kieronquinn.app.smartspacer.repositories.SmartspacerSettingsRepository
 import com.kieronquinn.app.smartspacer.repositories.SmartspacerSettingsRepository.ExpandedBackground
+import com.kieronquinn.app.smartspacer.repositories.SmartspacerSettingsRepository.ExpandedHideAddButton
 import com.kieronquinn.app.smartspacer.repositories.SmartspacerSettingsRepository.ExpandedOpenMode
 import com.kieronquinn.app.smartspacer.repositories.SmartspacerSettingsRepository.TintColour
 import com.kieronquinn.app.smartspacer.ui.base.BaseViewModel
@@ -39,6 +40,10 @@ abstract class ExpandedSettingsViewModel(scope: CoroutineScope?): BaseViewModel(
     abstract fun onBackgroundModeChanged(mode: ExpandedBackground)
     abstract fun onUseGoogleSansChanged(enabled: Boolean)
     abstract fun onXposedEnabledChanged(context: Context, enabled: Boolean)
+    abstract fun onHideAddChanged(hideAdd: ExpandedHideAddButton)
+    abstract fun onMultiColumnChanged(enabled: Boolean)
+    abstract fun onComplicationsFirstChanged(enabled: Boolean)
+    abstract fun onShowShadowChanged(enabled: Boolean)
 
     abstract fun isBackgroundBlurCompatible(): Boolean
 
@@ -56,7 +61,11 @@ abstract class ExpandedSettingsViewModel(scope: CoroutineScope?): BaseViewModel(
             val backgroundMode: ExpandedBackground,
             val widgetsUseGoogleSans: Boolean,
             val xposedAvailable: Boolean,
-            val xposedEnabled: Boolean
+            val xposedEnabled: Boolean,
+            val hideAdd: ExpandedHideAddButton,
+            val multiColumn: Boolean,
+            val complicationsFirst: Boolean,
+            val showShadow: Boolean
         ): State()
     }
 
@@ -80,7 +89,11 @@ class ExpandedSettingsViewModelImpl(
     private val closeWhenLocked = settings.expandedCloseWhenLocked
     private val backgroundMode = settings.expandedBackground
     private val widgetsUseGoogleSans = settings.expandedWidgetUseGoogleSans
+    private val hideAddButton = settings.expandedHideAddButton
     private val xposedEnabled = settings.expandedXposedEnabled
+    private val multiColumn = settings.expandedMultiColumnEnabled
+    private val complicationsFirst = settings.expandedComplicationsFirst
+    private val showShadow = settings.expandedShowShadow
 
     private val resumeBus = MutableStateFlow(System.currentTimeMillis())
 
@@ -104,13 +117,32 @@ class ExpandedSettingsViewModelImpl(
         Triple(show, provider, doodle)
     }
 
-    private val options = combine(
-        tintColour.asFlow(),
+    private val booleanOptions = combine(
         closeWhenLocked.asFlow(),
+        widgetsUseGoogleSans.asFlow(),
+        multiColumn.asFlow(),
+        complicationsFirst.asFlow(),
+        showShadow.asFlow()
+    ) { options ->
+        options
+    }
+
+    private val options = combine(
+        booleanOptions,
+        tintColour.asFlow(),
         backgroundMode.asFlow(),
-        widgetsUseGoogleSans.asFlow()
-    ) { tint, close, mode, googleSans ->
-        Options(tint, close, mode, googleSans)
+        hideAddButton.asFlow()
+    ) { booleanOptions, tint, background, hideAdd ->
+        Options(
+            tint,
+            booleanOptions[0],
+            background,
+            booleanOptions[1],
+            hideAdd,
+            booleanOptions[2],
+            booleanOptions[3],
+            booleanOptions[4]
+        )
     }
 
     override val state = combine(
@@ -132,7 +164,11 @@ class ExpandedSettingsViewModelImpl(
             options.backgroundMode,
             options.widgetsUseGoogleSans,
             xposed,
-            open.third
+            open.third,
+            options.hideAddButton,
+            options.multiColumn,
+            options.complicationsFirst,
+            options.showShadow
         )
     }.stateIn(vmScope, SharingStarted.Eagerly, State.Loading)
 
@@ -209,6 +245,30 @@ class ExpandedSettingsViewModelImpl(
         }
     }
 
+    override fun onHideAddChanged(hideAdd: ExpandedHideAddButton) {
+        vmScope.launch {
+            hideAddButton.set(hideAdd)
+        }
+    }
+
+    override fun onMultiColumnChanged(enabled: Boolean) {
+        vmScope.launch {
+            multiColumn.set(enabled)
+        }
+    }
+
+    override fun onComplicationsFirstChanged(enabled: Boolean) {
+        vmScope.launch {
+            complicationsFirst.set(enabled)
+        }
+    }
+
+    override fun onShowShadowChanged(enabled: Boolean) {
+        vmScope.launch {
+            showShadow.set(enabled)
+        }
+    }
+
     override fun isBackgroundBlurCompatible(): Boolean {
         return Build.VERSION.SDK_INT >= 30
     }
@@ -217,7 +277,11 @@ class ExpandedSettingsViewModelImpl(
         val tintColour: TintColour,
         val closeWhenLocked: Boolean,
         val backgroundMode: ExpandedBackground,
-        val widgetsUseGoogleSans: Boolean
+        val widgetsUseGoogleSans: Boolean,
+        val hideAddButton: ExpandedHideAddButton,
+        val multiColumn: Boolean,
+        val complicationsFirst: Boolean,
+        val showShadow: Boolean
     )
 
 }

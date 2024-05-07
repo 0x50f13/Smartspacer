@@ -13,8 +13,8 @@ plugins {
 
 apply plugin: 'com.google.android.gms.oss-licenses-plugin'
 
-def tagName = '1.6.4-maroon2'
-def tagCode = 102164
+def tagName = '1.7.3-maroon2'
+def tagCode = 173
 
 android {
     compileSdk 34
@@ -72,7 +72,7 @@ android {
 dependencies {
     implementation 'androidx.core:core-ktx:1.12.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.11.0'
+    implementation 'com.google.android.material:material:1.12.0-rc01'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation "androidx.lifecycle:lifecycle-service:2.7.0"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
@@ -122,7 +122,7 @@ dependencies {
     implementation "com.github.topjohnwu.libsu:service:${libsuVersion}"
 
     //Dependency Injection
-    implementation "io.insert-koin:koin-android:3.5.0"
+    implementation "io.insert-koin:koin-android:3.5.3"
 
     implementation 'com.jakewharton:process-phoenix:2.1.2'
 
@@ -143,6 +143,7 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:2.9.0"
     implementation 'androidx.palette:palette-ktx:1.0.0'
     implementation "org.jetbrains.kotlin:kotlin-reflect:1.9.20"
+    implementation "com.tbuonomo:dotsindicator:5.0"
 
     //Autostarter provides some OEM battery checks + starting settings for disabling them
     implementation 'com.github.judemanutd:autostarter:1.1.0'
@@ -150,6 +151,9 @@ dependencies {
     //Markdown support
     implementation "io.noties.markwon:core:4.6.2"
     implementation "io.noties.markwon:image-glide:4.6.2"
+
+    //Expanded Smartspace grid
+    implementation 'com.google.android.flexbox:flexbox:3.0.0'
 
     //OSS libraries activity
     implementation 'com.google.android.gms:play-services-oss-licenses:17.0.1'

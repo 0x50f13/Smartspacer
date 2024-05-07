@@ -2,11 +2,16 @@ package com.kieronquinn.app.smartspacer.sdk.client.views.base
 
 import android.app.PendingIntent
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.annotation.RestrictTo
 import androidx.viewbinding.ViewBinding
 import com.kieronquinn.app.smartspacer.sdk.client.utils.whenResumed
+import com.kieronquinn.app.smartspacer.sdk.client.views.DoubleShadowImageView
 import com.kieronquinn.app.smartspacer.sdk.model.SmartspaceTarget
 
 abstract class SmartspacerBasePageView<V: ViewBinding>(
@@ -20,11 +25,13 @@ abstract class SmartspacerBasePageView<V: ViewBinding>(
             clazz: Class<out SmartspacerBasePageView<*>>,
             target: SmartspaceTarget,
             listener: SmartspaceTargetInteractionListener?,
-            tintColour: Int
+            tintColour: Int,
+            applyShadowIfRequired: Boolean
         ): SmartspacerBasePageView<*> {
             return clazz.getConstructor(Context::class.java).newInstance(context).apply {
+                val shouldApplyShadow = applyShadowIfRequired && tintColour == Color.WHITE
                 whenResumed {
-                    setTarget(target, listener, tintColour)
+                    setTarget(target, listener, tintColour, shouldApplyShadow)
                 }
             }
         }
@@ -35,8 +42,24 @@ abstract class SmartspacerBasePageView<V: ViewBinding>(
     abstract suspend fun setTarget(
         target: SmartspaceTarget,
         interactionListener: SmartspaceTargetInteractionListener?,
-        tintColour: Int
+        tintColour: Int,
+        applyShadow: Boolean
     )
+
+    protected fun ImageView.setShadowEnabled(enabled: Boolean) {
+        //Shadowing is only available on the DoubleShadowImageView
+        if(this !is DoubleShadowImageView) return
+        applyShadow = enabled
+    }
+
+    protected fun TextView.setShadowEnabled(enabled: Boolean) {
+        setShadowLayer(
+            shadowRadius,
+            shadowDx,
+            shadowDy,
+            if(enabled) Color.BLACK else Color.TRANSPARENT
+        )
+    }
 
     interface SmartspaceTargetInteractionListener {
         companion object {
@@ -57,7 +80,7 @@ abstract class SmartspacerBasePageView<V: ViewBinding>(
         @RestrictTo(RestrictTo.Scope.LIBRARY)
         fun shouldTrampolineLaunches(): Boolean = false
         @RestrictTo(RestrictTo.Scope.LIBRARY)
-        fun trampolineLaunch(pendingIntent: PendingIntent) {}
+        fun trampolineLaunch(view: View, pendingIntent: PendingIntent) {}
     }
 
 }

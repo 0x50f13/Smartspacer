@@ -1,3 +1,4 @@
+@file:SuppressLint("BlockedPrivateApi")
 package com.kieronquinn.app.smartspacer.utils.extensions
 
 import android.annotation.SuppressLint
@@ -6,8 +7,10 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
+import android.content.res.ColorStateList
 import android.net.Uri
 import android.os.Build
+import android.os.Bundle
 import android.util.SizeF
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +18,10 @@ import android.widget.RemoteViews
 import android.widget.RemoteViews.RemoteCollectionItems
 import android.widget.RemoteViews.RemoteResponse
 import android.widget.RemoteViewsHidden
+import android.window.SplashScreen
 import androidx.annotation.RequiresApi
+import androidx.core.widget.RemoteViewsCompat.setImageViewColorFilter
+import androidx.core.widget.RemoteViewsCompat.setImageViewImageTintList
 import com.kieronquinn.app.smartspacer.providers.SmartspacerWidgetProxyContentProvider.Companion.createSmartspacerWidgetProxyUri
 import com.kieronquinn.app.smartspacer.sdk.client.views.base.SmartspacerBasePageView.SmartspaceTargetInteractionListener
 import com.kieronquinn.app.smartspacer.ui.activities.OverlayTrampolineActivity
@@ -176,6 +182,13 @@ fun RemoteViews.getRemoteViewsToApply(context: Context, widgetSize: SizeF): Remo
         .getRemoteViewsToApply(context, widgetSize)
 }
 
+fun RemoteViews.getBestRemoteViews(context: Context, widgetSize: SizeF): RemoteViews {
+    val sized = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        getRemoteViewsToApply(context, widgetSize)
+    } else null
+    return sized ?: this
+}
+
 @SuppressLint("SoonBlockedPrivateApi", "BlockedPrivateApi")
 fun RemoteViews.getSizedRemoteViews(): List<RemoteViews> {
     val landscape = RemoteViews::class.java.getDeclaredField("mLandscape").apply {
@@ -212,7 +225,7 @@ fun RemoteViews_trampolinePendingIntent(
     options: AndroidPair<Intent, ActivityOptions>
 ): Boolean {
     OverlayTrampolineActivity.trampoline(
-        view.context, pendingIntent, options.second, options.first
+        view, view.context, pendingIntent, options.second, options.first
     )
     return true
 }
@@ -222,17 +235,49 @@ fun RemoteViews_startPendingIntent(
     pendingIntent: PendingIntent,
     options: AndroidPair<Intent, ActivityOptions>
 ): Boolean {
+    //Merge the existing options with our animation ones by combining the bundles and then reforming
+    val animationOptions = view.createActivityOptions().apply {
+        putAll(options.second.toBundle())
+    }
+    val overrideOptions = AndroidPair(options.first, ActivityOptions_fromBundle(animationOptions))
     return RemoteViews::class.java.getMethod(
         "startPendingIntent",
         View::class.java,
         PendingIntent::class.java,
         AndroidPair::class.java
-    ).invoke(null, view, pendingIntent, options) as Boolean
+    ).invoke(null, view, pendingIntent, overrideOptions) as Boolean
+}
+
+private fun View.createActivityOptions(): Bundle {
+    return ActivityOptions.makeScaleUpAnimation(
+        this,
+        0,
+        0,
+        width,
+        height
+    ).setSplashStyle().toBundle()
+}
+
+private fun ActivityOptions.setSplashStyle() = apply {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        setSplashScreenStyle(SplashScreen.SPLASH_SCREEN_STYLE_ICON)
+    }
 }
 
 fun RemoteResponse.getLaunchOptions(view: View): AndroidPair<Intent, ActivityOptions>{
     return RemoteResponse::class.java.getMethod("getLaunchOptions", View::class.java)
         .invoke(this, view) as AndroidPair<Intent, ActivityOptions>
+}
+
+fun RemoteViews.setImageViewImageTintListCompat(
+    id: Int,
+    colourStateList: ColorStateList
+) {
+    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        setImageViewImageTintList(id, colourStateList)
+    }else{
+        setImageViewColorFilter(id, colourStateList.defaultColor)
+    }
 }
 
 private fun Class<*>.getDeclaredField(vararg options: String): Field {

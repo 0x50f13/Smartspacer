@@ -1,10 +1,12 @@
 package com.kieronquinn.app.smartspacer.sdk.client.views.templates
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.CallSuper
 import androidx.core.view.isVisible
 import androidx.viewbinding.ViewBinding
 import com.kieronquinn.app.smartspacer.sdk.client.databinding.IncludeSmartspacePageSubtitleAndActionBinding
@@ -26,10 +28,13 @@ abstract class SmartspacerBaseTemplatePageView<V : ViewBinding>(
     abstract val subtitle: SubtitleBinding
     abstract val supplemental: IncludeSmartspacePageSupplementalBinding
 
+    @SuppressLint("RestrictedApi")
+    @CallSuper
     override suspend fun setTarget(
         target: SmartspaceTarget,
         interactionListener: SmartspaceTargetInteractionListener?,
-        tintColour: Int
+        tintColour: Int,
+        applyShadow: Boolean
     ) {
         with(target.templateData!!) {
             primaryItem?.let {
@@ -49,7 +54,9 @@ abstract class SmartspacerBaseTemplatePageView<V : ViewBinding>(
             subtitleSupplementalItem?.let {
                 it.text?.let { text -> subtitle.action?.setText(text, tintColour) }
                 it.icon?.let { icon -> subtitle.actionIcon?.setIcon(icon, tintColour) }
-                subtitle.action?.setOnClick(target, it.tapAction, interactionListener)
+                subtitle.action?.setOnClick(
+                    target, it.tapAction, interactionListener, subtitle.actionIcon
+                )
                 subtitle.actionIcon?.setOnClick(target, it.tapAction, interactionListener)
             }
             subtitle.root.isVisible = subtitleItem != null || supplementalLineItem != null
@@ -72,6 +79,14 @@ abstract class SmartspacerBaseTemplatePageView<V : ViewBinding>(
                 supplementalLineItem?.text != null
             supplemental.smartspacePageSupplementalIcon.isVisible =
                 supplementalLineItem?.icon != null
+
+            title?.smartspaceViewTitle?.setShadowEnabled(applyShadow)
+            subtitle.subtitle.setShadowEnabled(applyShadow)
+            subtitle.subtitleIcon.setShadowEnabled(applyShadow)
+            supplemental.smartspacePageSupplementalText.setShadowEnabled(applyShadow)
+            supplemental.smartspacePageSupplementalIcon.setShadowEnabled(applyShadow)
+            subtitle.action?.setShadowEnabled(applyShadow)
+            subtitle.actionIcon?.setShadowEnabled(applyShadow)
         }
     }
 
