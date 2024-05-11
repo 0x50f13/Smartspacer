@@ -14,7 +14,7 @@ plugins {
 apply plugin: 'com.google.android.gms.oss-licenses-plugin'
 
 def tagName = '1.7.3-maroon2'
-def tagCode = 173
+def tagCode = 102173
 
 android {
     compileSdk 34

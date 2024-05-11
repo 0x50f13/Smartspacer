@@ -19,9 +19,7 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build with Gradle
-      run: touch local.properties && ./gradlew build
-    - name: Test with Gradle
-      run: ./gradlew test
+      run: touch local.properties && ./gradlew build app:assembleDebug
     - name: Upload debug APK
       uses: actions/upload-artifact@v3
       with:
