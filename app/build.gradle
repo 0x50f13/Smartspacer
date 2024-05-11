@@ -55,17 +55,6 @@ android {
     androidResources {
         generateLocaleConfig true
     }
-    testOptions {
-        packagingOptions {
-            jniLibs {
-                useLegacyPackaging = true
-            }
-        }
-        unitTests.all {
-            isIncludeAndroidResources = true
-        }
-        execution 'ANDROIDX_TEST_ORCHESTRATOR'
-    }
     namespace 'com.kieronquinn.app.smartspacer'
 }
 
