@@ -51,7 +51,6 @@ data class AppWidget(
     val animate: Boolean = true,
     @ColumnInfo("auto_switch_pages")
     val autoSwitchPages: Boolean = false,
-    val animate: Boolean = true,
     /**
      *  Whether to show a shadow on text where required. Icons are not supported.
      */

@@ -29,8 +29,6 @@ import com.kieronquinn.app.smartspacer.repositories.AccessibilityRepository
 import com.kieronquinn.app.smartspacer.repositories.AccessibilityRepositoryImpl
 import com.kieronquinn.app.smartspacer.repositories.AlarmRepository
 import com.kieronquinn.app.smartspacer.repositories.AlarmRepositoryImpl
-import com.kieronquinn.app.smartspacer.repositories.AnalyticsRepository
-import com.kieronquinn.app.smartspacer.repositories.AnalyticsRepositoryImpl
 import com.kieronquinn.app.smartspacer.repositories.AppPredictionRepository
 import com.kieronquinn.app.smartspacer.repositories.AppPredictionRepositoryImpl
 import com.kieronquinn.app.smartspacer.repositories.AppWidgetRepository
