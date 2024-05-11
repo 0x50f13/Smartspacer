@@ -1,0 +1,41 @@
+{
+  "project_info": {
+    "project_number": "YOUR_PROJECT_NUMBER",
+    "project_id": "YOUR_PROJECT_ID",
+    "name": "YOUR_PROJECT_NAME",
+    "firebase_url": "YOUR_FIREBASE_APP_URL",
+    "storage_bucket": "YOUR_FIREBASE_STORAGE_BUCKET",
+    "project_api_key": "YOUR_API_KEY"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "YOUR_MOBILE_SDK_APP_ID",
+        "android_client_info": {
+          "package_name": "com.kieronquinn.app.smartspacer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "YOUR_WEB_CLIENT_ID",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "YOUR_API_KEY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": "DISABLED"
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
+
